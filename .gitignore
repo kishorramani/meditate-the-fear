@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment variables
+.env
+.env.local
+.env.production.local
+.env.development.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor
+.vscode/*
+!.vscode/settings.json
+.DS_Store
+
+# Android build files
+android/app/build/
+android/.gradle/
+android/local.properties
+android/.idea/
+
+# Capacitor
+.capacitor/
+
+# Temporary files
+*.log
+*.tmp
+*.temp
+
+# DO NOT IGNORE .kiro directory (required for Kiroween submission)
+# .kiro/
