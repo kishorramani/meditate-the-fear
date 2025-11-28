@@ -15,7 +15,7 @@
 **Live Demo:** [https://meditate-the-fear.vercel.app](https://meditate-the-fear.vercel.app)
 
 ### 📱 Android App
-**Download APK:** [Latest Release](https://github.com/kishorramani/meditate-the-fear/releases/latest)
+**Download APK:** [Latest Release](https://github.com/kishorramani/meditate-the-fear/tree/main/releases/latest)
 
 ---
 
