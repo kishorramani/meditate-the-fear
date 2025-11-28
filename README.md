@@ -9,6 +9,52 @@
 
 ---
 
+## 🚀 Try It Now!
+
+### 🌐 Web App
+**Live Demo:** [https://meditate-the-fear.vercel.app](https://meditate-the-fear.vercel.app)
+
+### 📱 Android App
+**Download APK:** [Latest Release](https://github.com/kishorramani/meditate-the-fear/releases/latest)
+
+---
+
+## 📸 Screenshots
+
+### Web Version
+
+<div align="center">
+
+| Duration Selection | Difficulty Selection | Sound Selection |
+|:------------------:|:--------------------:|:---------------:|
+| <img src="screenshot-web/2-duration_screen.png" alt="Duration Selection" width="250"/> | <img src="screenshot-web/3-difficulty-screen.png" alt="Difficulty Selection" width="250"/> | <img src="screenshot-web/4-sound-screen.png" alt="Sound Selection" width="250"/> |
+
+| Meditation (Calm) | Horror Mode | Session Stats |
+|:-----------------:|:-----------:|:-------------:|
+| <img src="screenshot-web/5-meditation-calm.png" alt="Calm Meditation" width="250"/> | <img src="screenshot-web/6-meditation_horror-mode.png" alt="Horror Mode" width="250"/> | <img src="screenshot-web/7-stats-screen.png" alt="Session Stats" width="250"/> |
+
+</div>
+
+### Android Version
+
+<div align="center">
+
+| Splash Screen | Duration Selection | Difficulty Selection |
+|:-------------:|:------------------:|:--------------------:|
+| <img src="screenshot-android/1-splash.png" alt="Splash Screen" width="250"/> | <img src="screenshot-android/2-duration_screen.png" alt="Duration Selection" width="250"/> | <img src="screenshot-android/3-difficulty-screen.png" alt="Difficulty Selection" width="250"/> |
+
+| Sound Selection | Meditation (Calm) | Horror Mode |
+|:---------------:|:-----------------:|:-----------:|
+| <img src="screenshot-android/4-sound-screen.png" alt="Sound Selection" width="250"/> | <img src="screenshot-android/5-meditation-calm.png" alt="Calm Meditation" width="250"/> | <img src="screenshot-android/6-meditation_horror-mode.png" alt="Horror Mode" width="250"/> |
+
+| Session Stats |
+|:-------------:|
+| <img src="screenshot-android/7-stats-screen.png" alt="Session Stats" width="250"/> |
+
+</div>
+
+---
+
 ## 🎯 Hackathon Category: **Frankenstein**
 
 **"Stitch together a chimera of technologies into one app. Bring together seemingly incompatible elements to build something unexpectedly powerful."**
