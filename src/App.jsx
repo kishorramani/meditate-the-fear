@@ -14,6 +14,9 @@ const App = () => {
   const [selectedSound, setSelectedSound] = useState(null)
   const [selectedDifficulty, setSelectedDifficulty] = useState('normal')
   const [horrorImage, setHorrorImage] = useState(null)
+  const [showCustomTimer, setShowCustomTimer] = useState(false)
+  const [customMinutes, setCustomMinutes] = useState('')
+  const [customSeconds, setCustomSeconds] = useState('')
   
   // Session stats
   const [horrorEventsCount, setHorrorEventsCount] = useState(0)
@@ -67,7 +70,8 @@ const App = () => {
     { label: '3 min', value: 180 },
     { label: '5 min', value: 300 },
     { label: '10 min', value: 600 },
-    { label: '15 min', value: 900 }
+    { label: '15 min', value: 900 },
+    { label: 'Custom', value: 'custom' }
   ]
 
   const horrorMessages = [
@@ -123,7 +127,7 @@ const App = () => {
 
   // All meditation sounds with labels
   const meditationSounds = [
-    { label: 'Rain & Thunder', icon: '🌧️', file: '/sounds/mediation_rain-and-thunder-for-better-sleep.mp3' },
+    { label: 'Thunder', icon: '⛈️', file: '/sounds/meditation_thunder.mp3' },
     { label: 'Bird Chanting', icon: '🐦', file: '/sounds/meditation_beautiful-morning-with-birds-chanting.mp3' },
     { label: 'Bell', icon: '🔔', file: '/sounds/meditation_bell.mp3' },
     { label: 'Raindrops', icon: '💧', file: '/sounds/meditation_relax_relaxation_rain_raindrops_medium_water.mp3' },
@@ -505,23 +509,23 @@ const App = () => {
 
   const bgClass = horrorMode 
     ? 'bg-gradient-to-b from-red-950 via-black to-red-950' 
-    : 'bg-gradient-to-b from-orange-950 via-black to-purple-950'
+    : 'bg-gradient-to-b from-indigo-950 via-purple-950 to-black'
   
   const cardClass = horrorMode
-    ? 'bg-black border-2 border-red-600 shadow-2xl shadow-red-900/50'
-    : 'bg-gradient-to-br from-orange-900/30 to-purple-900/30 backdrop-blur-sm border-2 border-orange-500'
+    ? 'bg-gradient-to-br from-red-950/30 to-black/40 border-2 border-red-500/60 shadow-2xl shadow-red-900/50 backdrop-blur-sm'
+    : 'bg-gradient-to-br from-orange-900/40 to-purple-900/40 backdrop-blur-md border-2 border-orange-400 shadow-2xl shadow-orange-500/50'
   
   const timerClass = horrorMode
-    ? 'bg-gradient-to-br from-red-600 to-red-900 shadow-2xl shadow-red-600/50'
-    : 'bg-gradient-to-br from-orange-500 to-orange-700 shadow-2xl shadow-orange-500/50'
+    ? 'bg-gradient-to-br from-red-700/60 via-red-800/70 to-red-950/80 shadow-2xl shadow-red-600/50 border-2 border-red-400/60'
+    : 'bg-gradient-to-br from-orange-500 via-orange-600 to-orange-800 shadow-2xl shadow-orange-500/60 border-2 border-orange-300'
   
   const textClass = horrorMode
-    ? 'text-red-500 font-black'
-    : 'text-orange-400'
+    ? 'text-red-400 font-black drop-shadow-lg'
+    : 'text-orange-300 drop-shadow-md'
   
   const buttonClass = horrorMode
-    ? 'bg-red-700 hover:bg-red-800 text-white shadow-lg shadow-red-600/50'
-    : 'bg-orange-600 hover:bg-orange-700 text-white shadow-lg shadow-orange-500/50'
+    ? 'bg-gradient-to-r from-red-700/70 to-red-800/80 hover:from-red-800/80 hover:to-red-900/90 text-white shadow-lg shadow-red-600/50 border border-red-500/60'
+    : 'bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white shadow-lg shadow-orange-500/60 border border-orange-400'
 
   // Completion Dialog with Stats
   if (showCompletion) {
@@ -531,7 +535,11 @@ const App = () => {
     const shareText = `I meditated through ${totalMinutes} minutes of fear! 🎃 ${horrorEventsCount} scares faced, Fear Score: ${fearScore}/10. Can you meditate the fear? #MeditateTheFear`
     
     return (
-      <div className="min-h-screen h-screen bg-gradient-to-b from-orange-950 via-black to-purple-950 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+      <div className="min-h-screen h-screen bg-gradient-to-br from-orange-900 via-purple-950 via-black to-red-950 flex items-center justify-center p-3 sm:p-4 overflow-y-auto relative">
+        {/* Halloween Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-orange-900/30"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,107,0,0.1),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(139,0,255,0.1),transparent_50%)]"></div>
         <div className="w-full max-w-md px-2 my-auto">
           <div className="bg-gradient-to-br from-orange-900/40 to-purple-900/40 backdrop-blur-sm border-2 border-orange-500 rounded-3xl shadow-2xl shadow-orange-500/30 p-4 sm:p-6 md:p-8 text-center">
             <div className="text-4xl sm:text-5xl mb-3 sm:mb-4 animate-bounce">🎃</div>
@@ -750,9 +758,15 @@ const App = () => {
               {durations.map((duration) => (
                 <button
                   key={duration.value}
-                  onClick={() => setSelectedDuration(duration.value)}
+                  onClick={() => {
+                    if (duration.value === 'custom') {
+                      setShowCustomTimer(true)
+                    } else {
+                      setSelectedDuration(duration.value)
+                    }
+                  }}
                   className={`py-3 sm:py-4 px-3 sm:px-4 text-sm sm:text-base font-semibold rounded-xl sm:rounded-2xl transition-all ${
-                    selectedDuration === duration.value
+                    selectedDuration === duration.value || (duration.value === 'custom' && showCustomTimer)
                       ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/50 scale-105'
                       : 'bg-gray-700 text-gray-300 hover:bg-gray-600 border border-gray-600 active:scale-95'
                   }`}
@@ -762,9 +776,72 @@ const App = () => {
               ))}
             </div>
 
+            {/* Custom Timer Input */}
+            {showCustomTimer && (
+              <div className="mb-4 sm:mb-6 p-4 bg-black/40 rounded-2xl border border-purple-500/50">
+                <h3 className="text-center text-purple-400 font-semibold mb-3 text-sm sm:text-base">⏰ Custom Timer</h3>
+                <div className="flex items-center justify-center gap-2 sm:gap-3">
+                  <div className="flex flex-col items-center">
+                    <input
+                      type="number"
+                      min="0"
+                      max="59"
+                      placeholder="0"
+                      value={customMinutes}
+                      onChange={(e) => setCustomMinutes(e.target.value)}
+                      className="w-16 sm:w-20 h-12 sm:h-14 text-center text-lg sm:text-xl font-bold bg-gray-800 text-white border-2 border-orange-500 rounded-lg focus:border-purple-500 focus:outline-none"
+                    />
+                    <span className="text-xs text-gray-400 mt-1">min</span>
+                  </div>
+                  <span className="text-2xl text-purple-400 font-bold">:</span>
+                  <div className="flex flex-col items-center">
+                    <input
+                      type="number"
+                      min="0"
+                      max="59"
+                      placeholder="0"
+                      value={customSeconds}
+                      onChange={(e) => setCustomSeconds(e.target.value)}
+                      className="w-16 sm:w-20 h-12 sm:h-14 text-center text-lg sm:text-xl font-bold bg-gray-800 text-white border-2 border-orange-500 rounded-lg focus:border-purple-500 focus:outline-none"
+                    />
+                    <span className="text-xs text-gray-400 mt-1">sec</span>
+                  </div>
+                </div>
+                <div className="flex gap-2 mt-3">
+                  <button
+                    onClick={() => {
+                      const totalSeconds = (parseInt(customMinutes) || 0) * 60 + (parseInt(customSeconds) || 0)
+                      if (totalSeconds > 0) {
+                        setSelectedDuration(totalSeconds)
+                        setShowCustomTimer(false)
+                      }
+                    }}
+                    className="flex-1 py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold rounded-lg transition-all"
+                  >
+                    Set Timer
+                  </button>
+                  <button
+                    onClick={() => {
+                      setShowCustomTimer(false)
+                      setCustomMinutes('')
+                      setCustomSeconds('')
+                    }}
+                    className="flex-1 py-2 px-4 bg-gray-700 hover:bg-gray-600 text-gray-300 text-sm font-semibold rounded-lg transition-all"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            )}
+
             <button
               onClick={goToSoundSelection}
-              className="w-full py-3 sm:py-4 px-6 bg-orange-600 hover:bg-orange-700 active:bg-orange-800 text-white text-base sm:text-lg font-semibold rounded-full transition-all shadow-lg shadow-orange-500/50 active:scale-95"
+              disabled={selectedDuration === 'custom' || (showCustomTimer && !selectedDuration)}
+              className={`w-full py-3 sm:py-4 px-6 text-base sm:text-lg font-semibold rounded-full transition-all shadow-lg ${
+                selectedDuration === 'custom' || (showCustomTimer && !selectedDuration)
+                  ? 'bg-gray-700 text-gray-500 cursor-not-allowed opacity-50'
+                  : 'bg-orange-600 hover:bg-orange-700 active:bg-orange-800 text-white shadow-orange-500/50 active:scale-95'
+              }`}
             >
               🎃 Enter the Darkness 🎃
             </button>
@@ -777,6 +854,98 @@ const App = () => {
   // Main Meditation Screen
   return (
     <div className={`min-h-screen h-screen ${bgClass} flex items-center justify-center p-3 sm:p-4 transition-all duration-500 ${glitchActive ? 'animate-pulse' : ''} relative overflow-hidden`}>
+      {/* Halloween Scene Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {/* Night Sky */}
+        <div className="absolute inset-0 bg-gradient-to-b from-indigo-950 via-purple-950 to-black">
+          {/* Twinkling Stars */}
+          <div className="absolute top-10 left-10 w-1 h-1 bg-white rounded-full opacity-80" style={{ animation: 'twinkle 3s ease-in-out infinite' }}></div>
+          <div className="absolute top-20 right-20 w-0.5 h-0.5 bg-white rounded-full opacity-60" style={{ animation: 'twinkle 2s ease-in-out infinite reverse' }}></div>
+          <div className="absolute top-32 left-1/3 w-0.5 h-0.5 bg-white rounded-full opacity-70" style={{ animation: 'twinkle 4s ease-in-out infinite' }}></div>
+          <div className="absolute top-16 right-1/3 w-1 h-1 bg-white rounded-full opacity-90" style={{ animation: 'twinkle 2.5s ease-in-out infinite reverse' }}></div>
+          <div className="absolute top-24 left-2/3 w-0.5 h-0.5 bg-white rounded-full opacity-50" style={{ animation: 'twinkle 3.5s ease-in-out infinite' }}></div>
+        </div>
+        
+        {/* Haunted House - Background */}
+        <img 
+          src="./images/07haunted house, spooky house.png" 
+          alt="haunted house"
+          className="absolute top-16 right-4 w-32 h-40 sm:w-40 sm:h-52 opacity-60 object-contain"
+          style={{ animation: 'sway 8s ease-in-out infinite' }}
+        />
+        
+        {/* Spooky Trees */}
+        <img 
+          src="./images/10Spooky Halloween Tree.png" 
+          alt="spooky tree"
+          className="absolute bottom-0 left-0 w-40 h-56 sm:w-52 sm:h-72 opacity-80 object-contain"
+          style={{ animation: 'sway 12s ease-in-out infinite reverse' }}
+        />
+        
+        <img 
+          src="./images/06Halloween Pumpkins with Spooky Tree Silhouette.png" 
+          alt="tree with pumpkins"
+          className="absolute bottom-0 right-4 w-48 h-64 sm:w-60 sm:h-80 opacity-70 object-contain"
+          style={{ animation: 'sway 10s ease-in-out infinite' }}
+        />
+        
+        {/* Flying Witch */}
+        <img 
+          src="./images/12witch, flying witch, halloween.png" 
+          alt="flying witch"
+          className="absolute top-20 left-1/4 w-20 h-16 sm:w-28 sm:h-20 opacity-60 object-contain"
+          style={{ animation: 'fly 15s ease-in-out infinite, float 3s ease-in-out infinite' }}
+        />
+        
+        {/* Jack-o'-lanterns with Flickering Glow */}
+        <img 
+          src="./images/01Cartoon Jack O' Lantern.png" 
+          alt="jack-o-lantern"
+          className="absolute bottom-8 left-16 w-16 h-16 sm:w-24 sm:h-24 object-contain"
+          style={{ animation: 'flicker 2s ease-in-out infinite, bob 4s ease-in-out infinite' }}
+        />
+        
+        <img 
+          src="./images/02Cartoon Jack-o'-lanterns.png" 
+          alt="jack-o-lanterns"
+          className="absolute bottom-4 right-20 w-20 h-16 sm:w-28 sm:h-20 object-contain"
+          style={{ animation: 'flicker 2.5s ease-in-out infinite reverse, bob 3s ease-in-out infinite' }}
+        />
+        
+        {/* Halloween Bat - Flying */}
+        <img 
+          src="./images/08Retro Cartoon Bat Halloween.png" 
+          alt="halloween bat"
+          className="absolute top-28 right-1/4 w-12 h-10 sm:w-16 sm:h-12 opacity-70 object-contain"
+          style={{ animation: 'fly 8s linear infinite reverse, float 2s ease-in-out infinite' }}
+        />
+        
+        {/* Floating Ghost */}
+        <img 
+          src="./images/04Halloween cartoon ghost.png" 
+          alt="ghost"
+          className="absolute top-36 left-1/3 w-14 h-16 sm:w-20 sm:h-24 opacity-50 object-contain"
+          style={{ animation: 'float 6s ease-in-out infinite, sway 4s ease-in-out infinite' }}
+        />
+        
+        {/* Dangling Spider */}
+        <img 
+          src="./images/09Retro Cartoon Spider.png" 
+          alt="spider"
+          className="absolute top-12 left-12 w-10 h-10 sm:w-14 sm:h-14 opacity-60 object-contain"
+          style={{ animation: 'spiderMove 3s ease-in-out infinite' }}
+        />
+        
+        {/* Drifting Ground Fog */}
+        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-gray-900/60 via-gray-800/30 to-transparent" style={{ animation: 'fogDrift 20s ease-in-out infinite' }}></div>
+        
+        {/* Floating Magic Particles */}
+        <div className="absolute top-1/3 left-1/5 w-2 h-2 bg-orange-300/40 rounded-full blur-sm" style={{ animation: 'float 4s ease-in-out infinite, twinkle 2s ease-in-out infinite' }}></div>
+        <div className="absolute top-1/4 right-1/4 w-1 h-1 bg-purple-300/50 rounded-full" style={{ animation: 'float 6s ease-in-out infinite reverse, twinkle 3s ease-in-out infinite' }}></div>
+        <div className="absolute top-2/5 left-1/2 w-1 h-1 bg-yellow-300/40 rounded-full" style={{ animation: 'float 5s ease-in-out infinite, twinkle 2.5s ease-in-out infinite reverse' }}></div>
+        <div className="absolute top-1/6 left-3/4 w-1.5 h-1.5 bg-green-300/30 rounded-full blur-sm" style={{ animation: 'float 7s ease-in-out infinite, twinkle 4s ease-in-out infinite' }}></div>
+      </div>
+      
       {/* Horror Image Overlay */}
       {horrorImage && (
         <div className="absolute inset-0 z-10 flex items-center justify-center bg-black">

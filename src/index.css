@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Halloween Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+@keyframes fly {
+  0% { transform: translateX(-20px) translateY(0px); }
+  25% { transform: translateX(-10px) translateY(-5px); }
+  50% { transform: translateX(0px) translateY(0px); }
+  75% { transform: translateX(10px) translateY(-3px); }
+  100% { transform: translateX(20px) translateY(0px); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px rgba(255, 165, 0, 0.8)); }
+  50% { opacity: 0.7; filter: drop-shadow(0 0 15px rgba(255, 165, 0, 0.4)); }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes spiderMove {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes fogDrift {
+  0% { transform: translateX(-10px); opacity: 0.3; }
+  50% { transform: translateX(10px); opacity: 0.6; }
+  100% { transform: translateX(-10px); opacity: 0.3; }
+}

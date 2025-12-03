@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Nightmare Meditation</string>
-    <string name="title_activity_main">Nightmare Meditation</string>
+    <string name="app_name">Meditation the Fear</string>
+    <string name="title_activity_main">Meditation the Fear</string>
     <string name="package_name">com.horror.calm.zentimer.meditation.app</string>
     <string name="custom_url_scheme">com.horror.calm.zentimer.meditation.app</string>
 </resources>
