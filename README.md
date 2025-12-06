@@ -11,6 +11,9 @@
 
 ## 🚀 Try It Now!
 
+### � DemoA Video
+**Watch:** [Meditate the Fear.mp4](https://github.com/kishorramani/meditate-the-fear/blob/main/releases/Meditate%20the%20Fear.mp4)
+
 ### 🌐 Web App
 **Live Demo:** [https://meditate-the-fear.vercel.app](https://meditate-the-fear.vercel.app)
 
